@@ -23,7 +23,12 @@ import { SummaryCard } from "@/features/debts/components/summary-card";
 import { calculateDebtSummary } from "@/lib/debt/summary";
 import { formatCurrency } from "@/lib/utils/currency";
 import { formatDisplayName } from "@/lib/utils/user";
-import type { Debt, DebtStatusFilter, DebtTypeFilter } from "@/types/debt";
+import type {
+  Debt,
+  DebtStatusFilter,
+  DebtTypeFilter,
+  DebtSortOption,
+} from "@/types/debt";
 
 interface DashboardClientProps {
   userDisplayName: string;
@@ -57,6 +62,7 @@ export function DashboardClient({
   const [debts, setDebts] = useState<Debt[]>([]);
   const [statusFilter, setStatusFilter] = useState<DebtStatusFilter>("all");
   const [typeFilter, setTypeFilter] = useState<DebtTypeFilter>("all");
+  const [sortOption, setSortOption] = useState<DebtSortOption>("newest");
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -97,14 +103,29 @@ export function DashboardClient({
     void fetchDebts();
   }, [fetchDebts]);
 
-  const filteredDebts = useMemo(() => {
-    return debts.filter((debt) => {
+  const processedDebts = useMemo(() => {
+    const filtered = debts.filter((debt) => {
       const query = searchQuery.toLowerCase();
       const nameMatch = debt.counterpartName.toLowerCase().includes(query);
       const noteMatch = debt.note?.toLowerCase().includes(query) ?? false;
       return nameMatch || noteMatch;
     });
-  }, [debts, searchQuery]);
+
+    return [...filtered].sort((a, b) => {
+      switch (sortOption) {
+        case "newest":
+          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        case "oldest":
+          return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+        case "amount-desc":
+          return b.amount - a.amount;
+        case "amount-asc":
+          return a.amount - b.amount;
+        default:
+          return 0;
+      }
+    });
+  }, [debts, searchQuery, sortOption]);
 
   const summary = useMemo(() => calculateDebtSummary(debts), [debts]);
 
@@ -296,8 +317,10 @@ export function DashboardClient({
           <DebtFilters
             status={statusFilter}
             type={typeFilter}
+            sort={sortOption}
             onStatusChange={setStatusFilter}
             onTypeChange={setTypeFilter}
+            onSortChange={setSortOption}
           />
         </div>
 
@@ -308,11 +331,11 @@ export function DashboardClient({
           />
         ) : isLoading ? (
           <DebtLoadingState />
-        ) : filteredDebts.length === 0 ? (
+        ) : processedDebts.length === 0 ? (
           <DebtEmptyState />
         ) : (
           <div className="space-y-3">
-            {filteredDebts.map((debt) => (
+            {processedDebts.map((debt) => (
               <DebtItemCard
                 key={debt.id}
                 debt={debt}

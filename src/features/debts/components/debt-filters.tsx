@@ -1,13 +1,17 @@
 "use client";
 
 import { DEBT_STATUS_FILTERS, DEBT_TYPE_FILTERS } from "@/config/filters";
+import { DEBT_SORT_OPTIONS } from "@/config/sorting";
 import type { DebtStatusFilter, DebtTypeFilter } from "@/types/debt";
+import type { DebtSortOption } from "@/config/sorting";
 
 interface DebtFiltersProps {
   status: DebtStatusFilter;
   type: DebtTypeFilter;
+  sort: DebtSortOption;
   onStatusChange: (value: DebtStatusFilter) => void;
   onTypeChange: (value: DebtTypeFilter) => void;
+  onSortChange: (value: DebtSortOption) => void;
 }
 
 interface FilterSelectProps<T extends string> {
@@ -44,11 +48,13 @@ function FilterSelect<T extends string>({
 export function DebtFilters({
   onStatusChange,
   onTypeChange,
+  onSortChange,
   status,
   type,
+  sort,
 }: DebtFiltersProps) {
   return (
-    <section className="grid gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:grid-cols-2">
+    <section className="grid gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:grid-cols-3">
       <FilterSelect
         label="Status"
         options={DEBT_STATUS_FILTERS}
@@ -60,6 +66,12 @@ export function DebtFilters({
         options={DEBT_TYPE_FILTERS}
         value={type}
         onChange={onTypeChange}
+      />
+      <FilterSelect
+        label="Urutkan"
+        options={DEBT_SORT_OPTIONS}
+        value={sort}
+        onChange={onSortChange}
       />
     </section>
   );
