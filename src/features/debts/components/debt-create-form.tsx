@@ -97,8 +97,8 @@ export function DebtCreateForm() {
               <FilePlus2 className="h-6 w-6" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-slate-900">Catat Kasbon Baru</h1>
-              <p className="mt-1 text-base text-slate-600">
+              <h1 className="text-xl font-bold text-slate-900 sm:text-2xl">Catat Kasbon Baru</h1>
+              <p className="mt-1 text-sm text-slate-600 sm:text-base">
                 Tambahkan catatan hutang atau piutang baru untuk memantau pembayaran dengan lebih
                 mudah.
               </p>
@@ -106,14 +106,14 @@ export function DebtCreateForm() {
           </div>
 
           <form
-            className="space-y-4"
+            className="space-y-6"
             onSubmit={async (event) => {
               event.preventDefault();
               await handleSubmit(new FormData(event.currentTarget));
             }}
           >
-            <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-              <div className="space-y-8">
+            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+              <div className="space-y-6">
                 {/* Section 1: Info Dasar */}
                 <div className="space-y-5">
                   <div className="grid gap-5 sm:grid-cols-2">
@@ -122,7 +122,7 @@ export function DebtCreateForm() {
                       <select
                         name="type"
                         defaultValue="owed_to_me"
-                        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50"
+                        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:ring-2 focus:ring-slate-400"
                       >
                         <option value="owed_to_me">Dihutang ke saya</option>
                         <option value="i_owe">Saya hutang</option>
@@ -137,7 +137,7 @@ export function DebtCreateForm() {
                         name="counterpartName"
                         required
                         placeholder="Contoh: Budi"
-                        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50"
+                        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:ring-2 focus:ring-slate-400"
                       />
                       <p className="text-xs text-slate-500">
                         Siapa yang berhutang atau memberi pinjaman?
@@ -150,7 +150,7 @@ export function DebtCreateForm() {
                 </div>
 
                 {/* Section 2: Nominal & Tanggal */}
-                <div className="space-y-5 border-t border-slate-200 pt-8">
+                <div className="space-y-5 border-t border-slate-200 pt-6">
                   <label className="block space-y-1.5">
                     <span className="text-sm font-medium text-slate-700">Nominal Kasbon</span>
                     <div className="relative">
@@ -163,8 +163,8 @@ export function DebtCreateForm() {
                         min={1}
                         step={1}
                         type="number"
-                        placeholder="100.000"
-                        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 pl-12 text-lg font-semibold text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50"
+                        placeholder="100000"
+                        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 pl-12 text-lg font-semibold text-slate-900 outline-none transition focus:ring-2 focus:ring-slate-400"
                       />
                     </div>
                     <p className="text-xs text-slate-500">
@@ -179,20 +179,20 @@ export function DebtCreateForm() {
                     <input
                       name="dueDate"
                       type="date"
-                      className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50"
+                      className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:ring-2 focus:ring-slate-400"
                     />
                   </label>
                 </div>
 
                 {/* Section 3: Catatan */}
-                <div className="space-y-5 border-t border-slate-200 pt-8">
+                <div className="space-y-5 border-t border-slate-200 pt-6">
                   <label className="block space-y-1.5">
                     <span className="text-sm font-medium text-slate-700">Catatan</span>
                     <textarea
                       name="note"
                       rows={4}
                       placeholder="Tulis catatan tambahan di sini..."
-                      className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50"
+                      className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:ring-2 focus:ring-slate-400"
                     />
                     <p className="text-xs text-slate-500">Opsional</p>
                     {fieldErrors.note ? (
@@ -209,12 +209,12 @@ export function DebtCreateForm() {
               ) : null}
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
               <Link
                 href={ROUTES.dashboard}
-                className="flex-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-center text-sm font-medium text-slate-700 transition hover:bg-slate-50 sm:flex-initial sm:px-8"
+                className="flex-1 justify-center rounded-xl border border-slate-300 bg-white px-4 py-3 text-center text-sm font-medium text-slate-700 transition hover:bg-slate-50 sm:flex-initial sm:px-8"
               >
-                Kembali
+                Batal
               </Link>
               <button
                 type="submit"

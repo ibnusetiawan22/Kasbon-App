@@ -59,40 +59,45 @@ export function DebtItemCard({
 
       {debt.note ? <p className="mt-4 text-sm leading-6 text-slate-600">{debt.note}</p> : null}
 
-      <div className="mt-5 flex flex-col gap-2 sm:flex-row">
-        <button
-          type="button"
-          disabled={isSettled || isUpdating}
-          onClick={() => void onSettle(debt)}
-          className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-emerald-500 disabled:cursor-not-allowed disabled:bg-emerald-200"
-        >
-          <CheckCircle2 className="h-4 w-4" />
-          {isSettled ? "Sudah Lunas" : "Tandai Lunas"}
-        </button>
+      <div className="mt-5 flex flex-col gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <button
+            type="button"
+            disabled={isSettled || isUpdating}
+            onClick={() => void onSettle(debt)}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-emerald-500 disabled:cursor-not-allowed disabled:bg-emerald-200"
+          >
+            <CheckCircle2 className="h-4 w-4" />
+            {isSettled ? "Sudah Lunas" : "Tandai Lunas"}
+          </button>
+          <div className="grid grid-cols-2 gap-3">
+            <button
+              type="button"
+              disabled={isUpdating}
+              onClick={() => onEdit(debt)}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+            >
+              <Pencil className="h-4 w-4" />
+              Edit
+            </button>
 
-        <button
-          type="button"
-          disabled={isUpdating}
-          onClick={() => onEdit(debt)}
-          className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
-        >
-          <Pencil className="h-4 w-4" />
-          Edit
-        </button>
+            <button
+              type="button"
+              disabled={isDeleting}
+              onClick={() => void onDelete(debt)}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-red-200 px-4 py-2.5 text-sm font-medium text-red-700 transition hover:bg-red-50 disabled:opacity-60"
+            >
+              <Trash2 className="h-4 w-4" />
+              Hapus
+            </button>
+          </div>
+        </div>
 
-        <button
-          type="button"
-          disabled={isDeleting}
-          onClick={() => void onDelete(debt)}
-          className="inline-flex items-center justify-center gap-2 rounded-xl border border-red-200 px-4 py-2.5 text-sm font-medium text-red-700 transition hover:bg-red-50 disabled:opacity-60"
-        >
-          <Trash2 className="h-4 w-4" />
-          Hapus
-        </button>
-
-        <div className="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-50 px-4 py-2.5 text-sm text-slate-500 sm:ml-auto">
-          <CircleDollarSign className="h-4 w-4" />
-          {debt.dueDate ? `Jatuh tempo ${formatDate(debt.dueDate)}` : "Tanpa jatuh tempo"}
+        <div className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-50 px-4 py-2.5 text-sm text-slate-500">
+          <CalendarClock className="h-4 w-4" />
+          {debt.dueDate
+            ? `Jatuh tempo ${formatDate(debt.dueDate)}`
+            : "Tanpa jatuh tempo"}
         </div>
       </div>
     </article>

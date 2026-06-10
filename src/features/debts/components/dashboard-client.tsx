@@ -256,23 +256,23 @@ export function DashboardClient({
   return (
     <>
       <section className="space-y-8">
-        <div className="flex flex-col items-start justify-between gap-4 rounded-3xl bg-slate-900 p-6 text-white shadow-sm sm:flex-row sm:items-center">
+        <div className="flex flex-col items-start justify-between gap-6 rounded-3xl bg-slate-900 p-6 text-white shadow-sm sm:flex-row sm:items-center sm:gap-4">
           <div>
-            <h1 className="text-2xl font-bold">Halo 👋</h1>
-            <p className="mt-1.5 text-lg text-slate-200">
+            <h1 className="text-2xl font-bold sm:text-3xl">Halo 👋</h1>
+            <p className="mt-1.5 text-base text-slate-200 sm:text-lg">
               Selamat Datang{" "}
               <span className="font-semibold text-white">
                 {formatDisplayName(userDisplayName)}
               </span>
             </p>
-            <p className="mt-2 max-w-xl text-sm text-slate-400">
+            <p className="mt-2 max-w-xl text-xs text-slate-400 sm:text-sm">
               Kelola hutang piutang pribadi, pantau status pembayaran, dan lihat
               ringkasan keuangan dalam satu dashboard.
             </p>
           </div>
           <Link
             href="/dashboard/new"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-100 sm:w-auto"
+            className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-100 sm:w-auto"
           >
             <Plus className="h-4 w-4 text-slate-900" />
             <span className="text-slate-900">Tambah Kasbon</span>
@@ -300,17 +300,17 @@ export function DashboardClient({
           />
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-6">
           <div className="relative">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-              <Search className="h-4 w-4 text-slate-400" />
+              <Search className="h-5 w-5 text-slate-400" />
             </div>
             <input
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Cari nama atau catatan..."
-              className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-10 pr-4 text-sm text-slate-900 outline-none transition focus:border-slate-400 focus:ring-1 focus:ring-slate-400"
+              className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-slate-400 focus:ring-1 focus:ring-slate-400 sm:text-base sm:py-3.5"
             />
           </div>
 

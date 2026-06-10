@@ -59,23 +59,23 @@ export function DebtEditDialog({
 
   return (
     <div className="fixed inset-0 z-50 flex items-end bg-slate-950/45 p-4 sm:items-center sm:justify-center">
-      <div className="w-full rounded-3xl bg-white p-5 shadow-2xl sm:max-w-lg">
-        <div className="mb-4 flex items-start justify-between gap-4">
+      <div className="w-full rounded-3xl bg-white p-6 shadow-2xl sm:max-w-lg">
+        <div className="mb-6 flex items-start justify-between gap-4">
           <div>
-            <h2 className="text-lg font-semibold text-slate-900">Edit Kasbon</h2>
-            <p className="text-sm text-slate-500">Perbarui detail kasbon sesuai kebutuhan.</p>
+            <h2 className="text-xl font-semibold text-slate-900">Edit Kasbon</h2>
+            <p className="mt-1 text-sm text-slate-500">Perbarui detail kasbon sesuai kebutuhan.</p>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="rounded-full p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-800"
+            className="-m-2 rounded-full p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-800"
           >
-            <X className="h-4 w-4" />
+            <X className="h-5 w-5" />
           </button>
         </div>
 
         <form
-          className="space-y-4"
+          className="space-y-5"
           onSubmit={async (event) => {
             event.preventDefault();
 
@@ -101,7 +101,7 @@ export function DebtEditDialog({
                     : current,
                 )
               }
-              className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm outline-none transition focus:border-slate-500"
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base outline-none transition focus:border-slate-500"
             />
           </label>
 
@@ -117,7 +117,7 @@ export function DebtEditDialog({
                       : current,
                   )
                 }
-                className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm outline-none transition focus:border-slate-500"
+                className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base outline-none transition focus:border-slate-500"
               >
                 <option value="owed_to_me">Dihutang ke Saya</option>
                 <option value="i_owe">Saya Hutang</option>
@@ -137,7 +137,7 @@ export function DebtEditDialog({
                     current ? { ...current, amount: event.target.value } : current,
                   )
                 }
-                className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm outline-none transition focus:border-slate-500"
+                className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base outline-none transition focus:border-slate-500"
               />
             </label>
           </div>
@@ -152,7 +152,7 @@ export function DebtEditDialog({
                   current ? { ...current, dueDate: event.target.value } : current,
                 )
               }
-              className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm outline-none transition focus:border-slate-500"
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base outline-none transition focus:border-slate-500"
             />
           </label>
 
@@ -166,11 +166,11 @@ export function DebtEditDialog({
                   current ? { ...current, note: event.target.value } : current,
                 )
               }
-              className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm outline-none transition focus:border-slate-500"
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base outline-none transition focus:border-slate-500"
             />
           </label>
 
-          <label className="flex items-center gap-3 rounded-2xl border border-slate-200 px-4 py-3">
+          <label className="flex items-center gap-3 rounded-2xl border border-slate-200 p-4">
             <input
               type="checkbox"
               checked={formValues.settled}
@@ -179,23 +179,23 @@ export function DebtEditDialog({
                   current ? { ...current, settled: event.target.checked } : current,
                 )
               }
-              className="h-4 w-4 rounded border-slate-300"
+              className="h-5 w-5 rounded border-slate-300"
             />
             <span className="text-sm text-slate-700">Tandai sebagai lunas</span>
           </label>
 
-          <div className="flex gap-3">
+          <div className="flex flex-col gap-3 sm:flex-row">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 rounded-xl border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+              className="flex-1 rounded-xl border border-slate-300 px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
             >
               Batal
             </button>
             <button
               type="submit"
               disabled={isSaving}
-              className="flex-1 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-slate-800 disabled:opacity-60"
+              className="flex-1 rounded-xl bg-slate-900 px-4 py-3 text-sm font-medium text-white transition hover:bg-slate-800 disabled:opacity-60"
             >
               {isSaving ? "Menyimpan..." : "Simpan"}
             </button>
