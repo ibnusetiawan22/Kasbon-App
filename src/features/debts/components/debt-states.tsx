@@ -1,4 +1,5 @@
-import { AlertCircle, Inbox, RefreshCcw } from "lucide-react";
+import { AlertCircle, FileText, Inbox, Plus, RefreshCcw } from "lucide-react";
+import Link from "next/link";
 
 interface ErrorStateProps {
   message: string;
@@ -20,14 +21,24 @@ export function DebtLoadingState() {
 
 export function DebtEmptyState() {
   return (
-    <div className="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center shadow-sm">
-      <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 text-slate-500">
-        <Inbox className="h-6 w-6" />
+    <div className="mx-auto max-w-lg rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm sm:p-12">
+      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-slate-100">
+        <FileText className="h-8 w-8 text-slate-500" />
       </div>
-      <h2 className="text-lg font-semibold text-slate-900">Belum ada data kasbon</h2>
-      <p className="mt-2 text-sm text-slate-600">
-        Coba ubah filter atau tambahkan data kasbon baru dari API yang sudah tersedia.
+      <h2 className="mt-6 text-2xl font-bold text-slate-900">
+        Belum ada kasbon
+      </h2>
+      <p className="mx-auto mt-2 max-w-xs text-sm text-slate-500">
+        Mulai catat hutang dan piutang pertama kamu supaya lebih mudah
+        dipantau.
       </p>
+      <Link
+        href="/dashboard/new"
+        className="mt-8 inline-flex min-w-[220px] items-center justify-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-sm text-white shadow-sm transition-colors hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2"
+      >
+        <Plus className="h-5 w-5 shrink-0 text-white" />
+        <span className="font-semibold text-white">Tambah Kasbon</span>
+      </Link>
     </div>
   );
 }
