@@ -40,3 +40,9 @@ export interface DebtUpdate {
 }
 
 export type DebtTypeFilter = "all" | DebtType;
+
+export type DebtSortOption =
+  | "newest"
+  | "oldest"
+  | "amount-desc"
+  | "amount-asc";
