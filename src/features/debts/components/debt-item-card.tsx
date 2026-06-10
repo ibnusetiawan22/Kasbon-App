@@ -5,6 +5,7 @@ import { CalendarClock, CheckCircle2, CircleDollarSign, Pencil, Trash2 } from "l
 import { formatCurrency } from "@/lib/utils/currency";
 import type { Debt } from "@/types/debt";
 import { formatDate } from "@/lib/utils/date";
+import { formatRelativeTime } from "@/lib/utils/relative-time";
 import {
   getDebtStatusLabel,
   getDebtStatusVariant,
@@ -33,33 +34,25 @@ export function DebtItemCard({
   return (
     <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
       <div className="flex items-start justify-between gap-4">
-        <div className="space-y-2">
+        <div className="flex-1 space-y-2">
           <h3 className="text-base font-semibold text-slate-900">{debt.counterpartName}</h3>
           <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
             <span className="rounded-full bg-slate-100 px-2.5 py-1 font-medium text-slate-700">
               {getDebtTypeLabel(debt.type)}
             </span>
             <span
-              className={`rounded-full px-2.5 py-1 font-medium ring-1 ${getDebtStatusVariant(debt)}`}
+              className={`rounded-full px-2.5 py-1 font-medium ring-1 ${getDebtStatusVariant(
+                debt,
+              )}`}
             >
               {getDebtStatusLabel(debt)}
             </span>
           </div>
         </div>
         <div className="text-right">
-          <p className="text-lg font-semibold text-slate-900">
-            {formatCurrency(debt.amount)}
-          </p>
-          <p
-            className="mt-1 inline-flex items-center gap-1 text-xs text-slate-500"
-            title={debt.settledAt ? `Lunas pada ${formatDate(debt.settledAt)}` : (debt.dueDate ? `Jatuh tempo pada ${formatDate(debt.dueDate)}` : "Tidak ada tanggal jatuh tempo")}
-          >
-            <CalendarClock className="h-3.5 w-3.5" />
-            {debt.settledAt
-              ? `Lunas ${formatDate(debt.settledAt)}`
-              : debt.dueDate
-              ? `Jatuh tempo ${formatDate(debt.dueDate)}`
-              : "Tanpa jatuh tempo"}
+          <p className="text-lg font-semibold text-slate-900">{formatCurrency(debt.amount)}</p>
+          <p className="mt-0.5 text-xs text-slate-500" title={new Date(debt.createdAt).toLocaleString()}>
+            {formatRelativeTime(debt.createdAt)}
           </p>
         </div>
       </div>
